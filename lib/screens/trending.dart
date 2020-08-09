@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_foodybite/core/models/food.dart';
 import 'package:flutter_foodybite/core/viewmodels/homeviewmodel.dart';
-import 'package:flutter_foodybite/util/const.dart';
-import 'package:flutter_foodybite/util/restaurants.dart';
+import 'package:flutter_foodybite/screens/food_details.dart';
 import 'package:flutter_foodybite/widgets/trending_item.dart';
 import 'package:stacked/stacked.dart';
 
@@ -19,11 +19,11 @@ class _TrendingState extends State<Trending> {
         viewModelBuilder: () => HomeViewModel(),
         // onModelReady: () =>  ,
         builder: (context, model, child) => GestureDetector(
-              onTap: () => model.longUpdateStuff(),
+              // onTap: () => model.longUpdateStuff(),
               child: Scaffold(
                 appBar: AppBar(
                   elevation: 0.0,
-                  title: Text("UENR Trending Restaurants"),
+                  title: Text("Trending UENR Foods"),
                   centerTitle: true,
                   automaticallyImplyLeading: false,
                   leading: IconButton(
@@ -93,11 +93,18 @@ class _TrendingState extends State<Trending> {
                         itemBuilder: (BuildContext context, int index) {
                           Food food = model.allFoods[index];
 
-                          return TrendingItem(
-                            img: food.image,
-                            title: food.name,
-                            address: food.price.toString(),
-                            rating: food.name,
+                          return InkWell(
+                            onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        FoodDetailsView(food))),
+                            child: TrendingItem(
+                              img: food.image,
+                              title: food.name,
+                              price: food.price.toString(),
+                              rating: food.name,
+                              description: food.description,
+                            ),
                           );
                         },
                       ),

@@ -1,5 +1,7 @@
 import 'package:flutter_foodybite/core/services/apiservice.dart';
+import 'package:flutter_foodybite/core/services/foodservice.dart';
 import 'package:flutter_foodybite/core/services/graphql_client_api.dart';
+import 'package:flutter_foodybite/core/services/orderservice.dart';
 import 'package:flutter_foodybite/core/services/storage_service_shared_pref.dart';
 import 'package:get_it/get_it.dart';
 import 'storageservice.dart';
@@ -10,6 +12,7 @@ setupServiceLocator() {
   locator.registerLazySingleton<StorageService>(
       () => new StorageServiceSharedPreferences());
   locator.registerLazySingleton<APIService>(() => new GraphQLClientAPI());
-  // locator.registerLazySingleton<NewsService>(
-  //     () => new NewsServiceImplementation());
+
+  locator.registerLazySingleton<OrderService>(() => new OrderService());
+  locator.registerLazySingleton<FoodService>(() => new FoodService());
 }

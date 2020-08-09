@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_foodybite/core/services/apiservice.dart';
 import 'package:flutter_foodybite/core/services/graphql_client_api.dart';
 import 'package:flutter_foodybite/core/services/service_locator.dart';
+import 'package:flutter_foodybite/screens/cartview.dart';
 import 'package:flutter_foodybite/screens/home.dart';
 import 'package:flutter_foodybite/screens/profiledetails.dart';
 
@@ -25,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
         children: <Widget>[
           Home(),
           Home(),
-          Home(),
+          CartView(),
           Home(),
           ProfileDetails(),
         ],

@@ -1,49 +1,49 @@
-// import 'package:flutter_foodybite/core/services/graphql_client_api.dart';
-// import 'package:flutter_foodybite/core/viewmodels/homeviewmodel.dart';
-// import 'package:graphql_flutter/graphql_flutter.dart';
-// import 'package:observable_ish/observable_ish.dart';
-// import 'package:stacked/stacked.dart';
+import 'package:flutter_foodybite/core/models/food.dart';
+import 'package:flutter_foodybite/core/services/graphql_client_api.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
-// class InformationService with ReactiveServiceMixin {
-//   GraphQLClient cl = GraphQLClientAPI.clientToQuery();
-//   List<Food> foods = [];
+class FoodService {
+  GraphQLClient cl = GraphQLClientAPI.clientToQuery();
+  List<Food> foods = [];
 
-//   //1
-//   InformationService() {
-//     //3
-//     listenToReactiveValues([foods]);
-//     getAllFoods();
-//   }
+  FoodService() {
+    getAllFoods();
 
-//   //2
-//   RxValue<List<Food>> getFoods = RxValue<List<Food>>();
-//   List<Food> get allFoods => foods;
+    print("Get all Foods");
+  }
+  var getfoods = ''' 
+  query{
+  allProducts{
+    name
+    price
+    image
+    description
+  }
+}
+  ''';
 
-//   getAllFoods() async {
-//     QueryResult dl = await cl.query(
-//       QueryOptions(
-//         document: getfoods,
-//       ),
-//     );
+  getAllFoods() async {
+    QueryResult dl = await cl.query(
+      QueryOptions(
+        document: getfoods,
+      ),
+    );
 
-//     if (!dl.hasException) {
-//       print("has no error");
-//       print(dl.data);
+    if (!dl.hasException) {
+      print("has no error");
+      print(dl.data);
 
-//       for (var item in dl.data['allProducts']) {
-//         print(item.data);
-//         // var foo = jsonDecode()
-//         foods.add(new Food(item.data['name'], item.data['price'].toDouble()));
-//       }
-//     }
-//   }
+      for (var item in dl.data['allProducts']) {
+        print(item.data);
+        // var foo = jsonDecode()
+        foods.add(new Food(
+            name: item.data['name'],
+            price: item.data['price'].toDouble(),
+            image: item.data['image'],
+            description: item.data['description']));
+      }
+    }
 
-//   var getfoods = '''
-//   query{
-//   allProducts{
-//     name
-//     price
-//   }
-// }
-//   ''';
-// }
+    // print(foods.toList());
+  }
+}

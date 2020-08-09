@@ -2,34 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_foodybite/util/const.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 
-class SlideItem extends StatefulWidget {
+class CartWidget extends StatefulWidget {
   final String img;
   final String title;
   final String price;
+  String description;
   final String rating;
-  final String description;
 
-  SlideItem({
-    Key key,
-    @required this.img,
-    @required this.title,
-    @required this.price,
-    @required this.description,
-    @required this.rating,
-  }) : super(key: key);
+  CartWidget(
+      {Key key,
+      @required this.img,
+      @required this.title,
+      @required this.price,
+      @required this.rating})
+      : super(key: key);
 
   @override
-  _SlideItemState createState() => _SlideItemState();
+  _CartWidgetState createState() => _CartWidgetState();
 }
 
-class _SlideItemState extends State<SlideItem> {
+class _CartWidgetState extends State<CartWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
       child: Container(
-        // height: MediaQuery.of(context).size.height / 2.9,
-        width: MediaQuery.of(context).size.width / 1.2,
+        // height: MediaQuery.of(context).size.height / 2.2,
+        width: MediaQuery.of(context).size.width,
         child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
@@ -39,7 +38,7 @@ class _SlideItemState extends State<SlideItem> {
               Stack(
                 children: <Widget>[
                   Container(
-                    height: MediaQuery.of(context).size.height / 3.7,
+                    height: MediaQuery.of(context).size.height / 5.5,
                     width: MediaQuery.of(context).size.width,
                     child: ClipRRect(
                       borderRadius: BorderRadius.only(
@@ -68,7 +67,7 @@ class _SlideItemState extends State<SlideItem> {
                               size: 10,
                             ),
                             Text(
-                              " ${widget.rating} ",
+                              " ${widget.rating}",
                               style: TextStyle(
                                 fontSize: 10,
                               ),
@@ -123,10 +122,6 @@ class _SlideItemState extends State<SlideItem> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      HtmlWidget(
-                        "${widget.description}",
-                        textStyle: TextStyle(),
-                      ),
                       Text(
                         "${widget.price}",
                         style: TextStyle(

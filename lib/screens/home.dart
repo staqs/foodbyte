@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_foodybite/core/models/food.dart';
 import 'package:flutter_foodybite/core/viewmodels/homeviewmodel.dart';
+import 'package:flutter_foodybite/screens/food_details.dart';
 import 'package:flutter_foodybite/screens/trending.dart';
 import 'package:flutter_foodybite/util/categories.dart';
 import 'package:flutter_foodybite/util/friends.dart';
-import 'package:flutter_foodybite/util/restaurants.dart';
 import 'package:flutter_foodybite/widgets/slide_item.dart';
-import 'package:flutter_foodybite/widgets/trending_item.dart';
 import 'package:stacked/stacked.dart';
 
 class Home extends StatefulWidget {
@@ -23,7 +23,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
         viewModelBuilder: () => HomeViewModel(),
         // onModelReady: () =>  ,
         builder: (context, model, child) => GestureDetector(
-              onTap: () => model.longUpdateStuff(),
+              // onTap: () => model.longUpdateStuff(),
               child: Scaffold(
                 appBar: PreferredSize(
                   child: Padding(
@@ -92,7 +92,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            "Trending Restaurants",
+                            "Trending UENR Foods",
                             style: TextStyle(
                               fontSize: 23,
                               fontWeight: FontWeight.w800,
@@ -124,7 +124,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
 
                       //Horizontal List here
                       Container(
-                        height: MediaQuery.of(context).size.height / 2.4,
+                        height: MediaQuery.of(context).size.height / 2.1,
                         width: MediaQuery.of(context).size.width,
                         child: ListView.builder(
                           primary: false,
@@ -137,13 +137,20 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
                             Food food = model.allFoods[index];
                             print(food.name);
 
-                            return Padding(
-                              padding: EdgeInsets.only(right: 10.0),
-                              child: SlideItem(
-                                img: food.image,
-                                title: food.name,
-                                address: food.price.toString(),
-                                rating: food.name,
+                            return InkWell(
+                              onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          FoodDetailsView(food))),
+                              child: Padding(
+                                padding: EdgeInsets.only(right: 10.0),
+                                child: SlideItem(
+                                  img: food.image,
+                                  title: food.name,
+                                  price: food.price.toString(),
+                                  description: food.description,
+                                  rating: food.name,
+                                ),
                               ),
                             );
                           },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_foodybite/core/services/foodservice.dart';
 import 'package:flutter_foodybite/core/services/service_locator.dart';
 import 'package:flutter_foodybite/screens/main_screen.dart';
 import 'package:flutter_foodybite/util/const.dart';
@@ -23,6 +24,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isDark = false;
+
+  final FoodService foods = locator<FoodService>();
 
   @override
   void initState() {
