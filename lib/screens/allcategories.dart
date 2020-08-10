@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_foodybite/core/models/category.dart';
-import 'package:flutter_foodybite/core/models/food.dart';
 import 'package:flutter_foodybite/core/viewmodels/homeviewmodel.dart';
-import 'package:flutter_foodybite/screens/food_details.dart';
 import 'package:flutter_foodybite/util/categories.dart';
 import 'package:flutter_foodybite/widgets/categorylistitem.dart';
-import 'package:flutter_foodybite/widgets/trending_item.dart';
 import 'package:stacked/stacked.dart';
 
 class AllCategories extends StatefulWidget {
@@ -90,10 +87,11 @@ class _TrendingState extends State<AllCategories> {
                         primary: false,
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount:
-                            categories.length == null ? 0 : categories.length,
+                        itemCount: model.allCategories == null
+                            ? 0
+                            : model.allCategories.length,
                         itemBuilder: (BuildContext context, int index) {
-                          Category food = categories[index];
+                          Category food = model.allCategories[index];
 
                           return Container(
                               margin: EdgeInsets.all(10),

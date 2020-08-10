@@ -37,7 +37,7 @@ class _MyHomePageState extends State<ProfilePage> {
                         ])),
                 SizedBox(height: 90.0),
                 Text(
-                  'Tom Cruise',
+                  'Customer',
                   style: TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,

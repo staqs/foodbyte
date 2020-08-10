@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_foodybite/core/models/category.dart';
 import 'package:flutter_foodybite/core/models/food.dart';
-import 'package:flutter_foodybite/core/models/restaurant.dart';
 import 'package:flutter_foodybite/core/viewmodels/homeviewmodel.dart';
 import 'package:flutter_foodybite/screens/food_details.dart';
 import 'package:flutter_foodybite/widgets/trending_item.dart';
 import 'package:stacked/stacked.dart';
 
-class RestaurantScreen extends StatefulWidget {
-  final Restaurant restaurant;
+class CategoriesScreen extends StatefulWidget {
+  final Category category;
 
-  RestaurantScreen(this.restaurant);
+  CategoriesScreen(this.category);
   @override
-  RestaurantScreenState createState() => RestaurantScreenState();
+  _CategoriesScreenState createState() => _CategoriesScreenState();
 }
 
-class RestaurantScreenState extends State<RestaurantScreen> {
+class _CategoriesScreenState extends State<CategoriesScreen> {
   final TextEditingController _searchControl = new TextEditingController();
 
   @override
@@ -28,7 +27,7 @@ class RestaurantScreenState extends State<RestaurantScreen> {
               child: Scaffold(
                 appBar: AppBar(
                   elevation: 0.0,
-                  title: Text("${widget.restaurant.name}"),
+                  title: Text("${widget.category.name}"),
                   centerTitle: true,
                   automaticallyImplyLeading: false,
                   leading: IconButton(
@@ -92,27 +91,33 @@ class RestaurantScreenState extends State<RestaurantScreen> {
                         primary: false,
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: widget.restaurant.foods == null
-                            ? 0
-                            : widget.restaurant.foods.length,
+                        itemCount:
+                            model.allFoods == null ? 0 : model.allFoods.length,
                         itemBuilder: (BuildContext context, int index) {
-                          Food food = widget.restaurant.foods[index];
+                          Food food = model.allFoods[index];
                           print("Item List is ${model.allFoods.length}");
+                          if (food.category.toString() ==
+                              widget.category.value.toString()) {
+                            print("category ${food.name}  match");
+                            return InkWell(
+                              onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          FoodDetailsView(food))),
+                              child: TrendingItem(
+                                img: food.image,
+                                title: food.name,
+                                price: food.price.toString(),
+                                rating: food.name,
+                                description: food.description,
+                              ),
+                            );
+                          } else {
+                            print("category ${food.name} doesnt match");
+                          }
 
-                          print("category ${food.name}  match");
-                          return InkWell(
-                            onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        FoodDetailsView(food))),
-                            child: TrendingItem(
-                              img: food.image,
-                              title: food.name,
-                              price: food.price.toString(),
-                              rating: food.name,
-                              description: food.description,
-                            ),
-                          );
+                          // else return nothing
+                          return Container();
                         },
                       ),
                       SizedBox(height: 10.0),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_foodybite/core/services/apiservice.dart';
 import 'package:flutter_foodybite/core/services/graphql_client_api.dart';
 import 'package:flutter_foodybite/core/services/service_locator.dart';
+import 'package:flutter_foodybite/screens/aroundmescreen.dart';
 import 'package:flutter_foodybite/screens/cartview.dart';
 import 'package:flutter_foodybite/screens/home.dart';
 import 'package:flutter_foodybite/screens/profiledetails.dart';
@@ -26,9 +27,8 @@ class _MainScreenState extends State<MainScreen> {
         onPageChanged: onPageChanged,
         children: <Widget>[
           Home(),
-          Home(),
           CartView(),
-          Home(),
+          AroundMeScreen(),
           ProfilePage(),
         ],
       ),
@@ -75,23 +75,23 @@ class _MainScreenState extends State<MainScreen> {
             // ),
             IconButton(
               icon: Icon(
-                Icons.notifications,
+                Icons.gps_fixed,
                 size: 24.0,
               ),
-              color: _page == 3
+              color: _page == 2
                   ? Theme.of(context).accentColor
                   : Theme.of(context).textTheme.caption.color,
-              onPressed: () => _pageController.jumpToPage(3),
+              onPressed: () => _pageController.jumpToPage(2),
             ),
             IconButton(
               icon: Icon(
                 Icons.person,
                 size: 24.0,
               ),
-              color: _page == 4
+              color: _page == 3
                   ? Theme.of(context).accentColor
                   : Theme.of(context).textTheme.caption.color,
-              onPressed: () => _pageController.jumpToPage(4),
+              onPressed: () => _pageController.jumpToPage(3),
             ),
             SizedBox(width: 7),
           ],

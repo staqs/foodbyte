@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_foodybite/core/models/category.dart';
-import 'package:flutter_foodybite/core/models/food.dart';
 import 'package:flutter_foodybite/core/models/restaurant.dart';
 import 'package:flutter_foodybite/core/viewmodels/homeviewmodel.dart';
-import 'package:flutter_foodybite/screens/food_details.dart';
-import 'package:flutter_foodybite/widgets/trending_item.dart';
+import 'package:flutter_foodybite/util/categories.dart';
+import 'package:flutter_foodybite/widgets/categorylistitem.dart';
+import 'package:flutter_foodybite/widgets/restaurantItem.dart';
 import 'package:stacked/stacked.dart';
 
-class RestaurantScreen extends StatefulWidget {
-  final Restaurant restaurant;
-
-  RestaurantScreen(this.restaurant);
+class AllRestaurant extends StatefulWidget {
   @override
-  RestaurantScreenState createState() => RestaurantScreenState();
+  _TrendingState createState() => _TrendingState();
 }
 
-class RestaurantScreenState extends State<RestaurantScreen> {
+class _TrendingState extends State<AllRestaurant> {
   final TextEditingController _searchControl = new TextEditingController();
 
   @override
@@ -28,7 +25,7 @@ class RestaurantScreenState extends State<RestaurantScreen> {
               child: Scaffold(
                 appBar: AppBar(
                   elevation: 0.0,
-                  title: Text("${widget.restaurant.name}"),
+                  title: Text("All Categories"),
                   centerTitle: true,
                   automaticallyImplyLeading: false,
                   leading: IconButton(
@@ -92,27 +89,15 @@ class RestaurantScreenState extends State<RestaurantScreen> {
                         primary: false,
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: widget.restaurant.foods == null
+                        itemCount: model.allRestaurants == null
                             ? 0
-                            : widget.restaurant.foods.length,
+                            : model.allRestaurants.length,
                         itemBuilder: (BuildContext context, int index) {
-                          Food food = widget.restaurant.foods[index];
-                          print("Item List is ${model.allFoods.length}");
+                          Restaurant food = model.allRestaurants[index];
 
-                          print("category ${food.name}  match");
-                          return InkWell(
-                            onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        FoodDetailsView(food))),
-                            child: TrendingItem(
-                              img: food.image,
-                              title: food.name,
-                              price: food.price.toString(),
-                              rating: food.name,
-                              description: food.description,
-                            ),
-                          );
+                          return Container(
+                              margin: EdgeInsets.all(10),
+                              child: RestaurantItem(cat: food));
                         },
                       ),
                       SizedBox(height: 10.0),

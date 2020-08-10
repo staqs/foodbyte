@@ -4,6 +4,7 @@ import 'package:flutter_foodybite/core/models/food.dart';
 import 'package:flutter_foodybite/core/models/restaurant.dart';
 import 'package:flutter_foodybite/core/viewmodels/homeviewmodel.dart';
 import 'package:flutter_foodybite/screens/allcategories.dart';
+import 'package:flutter_foodybite/screens/allrestaurant.dart';
 import 'package:flutter_foodybite/screens/categories_screen.dart';
 import 'package:flutter_foodybite/screens/food_details.dart';
 import 'package:flutter_foodybite/screens/restaurantsscreen.dart';
@@ -317,7 +318,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (BuildContext context) {
-                                    return AllCategories();
+                                    return AllRestaurant();
                                   },
                                 ),
                               );

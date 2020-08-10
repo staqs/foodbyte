@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_foodybite/core/models/category.dart';
 import 'package:flutter_foodybite/core/models/food.dart';
+import 'package:flutter_foodybite/core/models/restaurant.dart';
 import 'package:flutter_foodybite/core/viewmodels/homeviewmodel.dart';
 import 'package:flutter_foodybite/screens/food_details.dart';
 import 'package:flutter_foodybite/util/categories.dart';
 import 'package:flutter_foodybite/widgets/categorylistitem.dart';
+import 'package:flutter_foodybite/widgets/restaurantItem.dart';
 import 'package:flutter_foodybite/widgets/trending_item.dart';
 import 'package:stacked/stacked.dart';
 
@@ -26,7 +28,7 @@ class _TrendingState extends State<AroundMeScreen> {
               child: Scaffold(
                 appBar: AppBar(
                   elevation: 0.0,
-                  title: Text("All Categories"),
+                  title: Text("Around Me"),
                   centerTitle: true,
                   automaticallyImplyLeading: false,
                   leading: IconButton(
@@ -90,14 +92,15 @@ class _TrendingState extends State<AroundMeScreen> {
                         primary: false,
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount:
-                            categories.length == null ? 0 : categories.length,
+                        itemCount: model.allRestaurants == null
+                            ? 0
+                            : model.allRestaurants.length,
                         itemBuilder: (BuildContext context, int index) {
-                          Category food = categories[index];
+                          Restaurant food = model.allRestaurants[index];
 
                           return Container(
                               margin: EdgeInsets.all(10),
-                              child: CategoryItem(cat: food));
+                              child: RestaurantItem(cat: food));
                         },
                       ),
                       SizedBox(height: 10.0),

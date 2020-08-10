@@ -42,7 +42,7 @@
 //     "rating": "4.5"
 //   },
 //   {
-//     "img": "assets/food8.jpeg",
+//     "img": "asetss/food8.jpeg",
 //     "title": "Happy Jones",
 //     "address": "123.0",
 //     "rating": "4.5"
