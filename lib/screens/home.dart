@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_foodybite/core/models/category.dart';
 import 'package:flutter_foodybite/core/models/food.dart';
 import 'package:flutter_foodybite/core/viewmodels/homeviewmodel.dart';
+import 'package:flutter_foodybite/screens/allcategories.dart';
+import 'package:flutter_foodybite/screens/categories_screen.dart';
 import 'package:flutter_foodybite/screens/food_details.dart';
 import 'package:flutter_foodybite/screens/trending.dart';
 import 'package:flutter_foodybite/util/categories.dart';
@@ -92,7 +95,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            "Trending UENR Foods",
+                            "Trending",
                             style: TextStyle(
                               fontSize: 23,
                               fontWeight: FontWeight.w800,
@@ -126,35 +129,39 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
                       Container(
                         height: MediaQuery.of(context).size.height / 2.1,
                         width: MediaQuery.of(context).size.width,
-                        child: ListView.builder(
-                          primary: false,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: model.allFoods.length == null
-                              ? 0
-                              : model.allFoods.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            Food food = model.allFoods[index];
-                            print(food.name);
+                        child: model.allFoods.length > 0
+                            ? ListView.builder(
+                                primary: false,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: model.allFoods.length == null
+                                    ? 0
+                                    : model.allFoods.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  Food food = model.allFoods[index];
+                                  print(food.name);
 
-                            return InkWell(
-                              onTap: () => Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          FoodDetailsView(food))),
-                              child: Padding(
-                                padding: EdgeInsets.only(right: 10.0),
-                                child: SlideItem(
-                                  img: food.image,
-                                  title: food.name,
-                                  price: food.price.toString(),
-                                  description: food.description,
-                                  rating: food.name,
-                                ),
+                                  return InkWell(
+                                    onTap: () => Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                FoodDetailsView(food))),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(right: 10.0),
+                                      child: SlideItem(
+                                        img: food.image,
+                                        title: food.name,
+                                        price: food.price.toString(),
+                                        description: food.description,
+                                        rating: food.name,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              )
+                            : Center(
+                                child: Text("No Foods"),
                               ),
-                            );
-                          },
-                        ),
                       ),
 
                       SizedBox(height: 10.0),
@@ -179,13 +186,13 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
                               ),
                             ),
                             onPressed: () {
-//                    Navigator.of(context).push(
-//                      MaterialPageRoute(
-//                        builder: (BuildContext context){
-//                          return DishesScreen();
-//                        },
-//                      ),
-//                    );
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                    return AllCategories();
+                                  },
+                                ),
+                              );
                             },
                           ),
                         ],
@@ -202,72 +209,202 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
                           shrinkWrap: true,
                           itemCount: categories == null ? 0 : categories.length,
                           itemBuilder: (BuildContext context, int index) {
-                            Map cat = categories[index];
+                            Category cat = categories[index];
 
-                            return Padding(
-                              padding: EdgeInsets.only(right: 10.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Stack(
-                                  children: <Widget>[
-                                    Image.asset(
-                                      cat["img"],
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              6,
-                                      width:
-                                          MediaQuery.of(context).size.height /
-                                              6,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                          // Add one stop for each color. Stops should increase from 0 to 1
-                                          stops: [0.2, 0.7],
-                                          colors: [
-                                            Color.fromARGB(100, 0, 0, 0),
-                                            Color.fromARGB(100, 0, 0, 0),
-                                          ],
-                                          // stops: [0.0, 0.1],
-                                        ),
-                                      ),
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              6,
-                                      width:
-                                          MediaQuery.of(context).size.height /
-                                              6,
-                                    ),
-                                    Center(
-                                      child: Container(
+                            return InkWell(
+                              onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          CategoriesScreen(cat))),
+                              child: Padding(
+                                padding: EdgeInsets.only(right: 10.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Stack(
+                                    children: <Widget>[
+                                      Image.asset(
+                                        cat.img,
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 6,
                                         width:
                                             MediaQuery.of(context).size.height /
                                                 6,
-                                        padding: EdgeInsets.all(1),
-                                        constraints: BoxConstraints(
-                                          minWidth: 20,
-                                          minHeight: 20,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                            // Add one stop for each color. Stops should increase from 0 to 1
+                                            stops: [0.2, 0.7],
+                                            colors: [
+                                              Color.fromARGB(100, 0, 0, 0),
+                                              Color.fromARGB(100, 0, 0, 0),
+                                            ],
+                                            // stops: [0.0, 0.1],
+                                          ),
                                         ),
-                                        child: Center(
-                                          child: Text(
-                                            cat["name"],
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                6,
+                                        width:
+                                            MediaQuery.of(context).size.height /
+                                                6,
+                                      ),
+                                      Center(
+                                        child: Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              6,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              6,
+                                          padding: EdgeInsets.all(1),
+                                          constraints: BoxConstraints(
+                                            minWidth: 20,
+                                            minHeight: 20,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              cat.name,
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                              textAlign: TextAlign.center,
                                             ),
-                                            textAlign: TextAlign.center,
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Restaurants",
+                            style: TextStyle(
+                              fontSize: 23,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          FlatButton(
+                            child: Text(
+                              "See all (9)",
+                              style: TextStyle(
+//                      fontSize: 22,
+//                      fontWeight: FontWeight.w800,
+                                color: Theme.of(context).accentColor,
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                    return AllCategories();
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+
+                      //Horizontal List here
+                      Container(
+                        height: MediaQuery.of(context).size.height / 6,
+                        child: ListView.builder(
+                          primary: false,
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          itemCount: categories == null ? 0 : categories.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            Category cat = categories[index];
+
+                            return InkWell(
+                              onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          CategoriesScreen(cat))),
+                              child: Padding(
+                                padding: EdgeInsets.only(right: 10.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Stack(
+                                    children: <Widget>[
+                                      Image.asset(
+                                        cat.img,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                6,
+                                        width:
+                                            MediaQuery.of(context).size.height /
+                                                6,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                            // Add one stop for each color. Stops should increase from 0 to 1
+                                            stops: [0.2, 0.7],
+                                            colors: [
+                                              Color.fromARGB(100, 0, 0, 0),
+                                              Color.fromARGB(100, 0, 0, 0),
+                                            ],
+                                            // stops: [0.0, 0.1],
+                                          ),
+                                        ),
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                6,
+                                        width:
+                                            MediaQuery.of(context).size.height /
+                                                6,
+                                      ),
+                                      Center(
+                                        child: Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              6,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              6,
+                                          padding: EdgeInsets.all(1),
+                                          constraints: BoxConstraints(
+                                            minWidth: 20,
+                                            minHeight: 20,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              cat.name,
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             );

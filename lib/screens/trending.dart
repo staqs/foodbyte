@@ -23,7 +23,7 @@ class _TrendingState extends State<Trending> {
               child: Scaffold(
                 appBar: AppBar(
                   elevation: 0.0,
-                  title: Text("Trending UENR Foods"),
+                  title: Text("Trending"),
                   centerTitle: true,
                   automaticallyImplyLeading: false,
                   leading: IconButton(

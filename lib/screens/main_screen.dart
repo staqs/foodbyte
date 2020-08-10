@@ -49,25 +49,29 @@ class _MainScreenState extends State<MainScreen> {
             ),
             IconButton(
               icon: Icon(
-                Icons.label,
+                Icons.shopping_cart,
                 size: 24.0,
               ),
               color: _page == 1
                   ? Theme.of(context).accentColor
                   : Theme.of(context).textTheme.caption.color,
-              onPressed: () => _pageController.jumpToPage(1),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => CartView()));
+                print("Cart View Clicked");
+              },
             ),
-            IconButton(
-              icon: Icon(
-                Icons.add,
-                size: 24.0,
-                color: Theme.of(context).primaryColor,
-              ),
-              color: _page == 2
-                  ? Theme.of(context).accentColor
-                  : Theme.of(context).textTheme.caption.color,
-              onPressed: () => _pageController.jumpToPage(2),
-            ),
+            // IconButton(
+            //   icon: Icon(
+            //     Icons.add,
+            //     size: 24.0,
+            //     color: Theme.of(context).primaryColor,
+            //   ),
+            //   color: _page == 2
+            //       ? Theme.of(context).accentColor
+            //       : Theme.of(context).textTheme.caption.color,
+            //   onPressed: () => _pageController.jumpToPage(2),
+            // ),
             IconButton(
               icon: Icon(
                 Icons.notifications,
@@ -96,13 +100,17 @@ class _MainScreenState extends State<MainScreen> {
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        elevation: 10.0,
-        child: Icon(
-          Icons.shopping_cart,
-        ),
-        onPressed: () => _pageController.jumpToPage(2),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //     elevation: 10.0,
+      //     child: Icon(
+      //       Icons.shopping_cart,
+      //     ),
+      //     // onPressed: () => _pageController.jumpToPage(2),
+      //     onPressed: () {
+      //       Navigator.of(context).push(MaterialPageRoute(
+      //           builder: (BuildContext context) => CartView()));
+      //       print("Cart View Clicked");
+      //     }),
     );
   }
 

@@ -4,11 +4,12 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 
 class GraphQLClientAPI extends APIService {
   static HttpLink httpLink = HttpLink(
-    uri: "https://foododeringsystem.herokuapp.com/admin/api",
+    uri: ("https://foododeringsystem.herokuapp.com/admin/api"),
   );
 
   ValueNotifier<GraphQLClient> client = ValueNotifier(
     GraphQLClient(
+      // host
       link: httpLink,
       cache: OptimisticCache(dataIdFromObject: typenameDataIdFromObject),
     ),

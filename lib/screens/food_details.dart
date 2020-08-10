@@ -39,8 +39,8 @@ class FoodDetailsView extends StatelessWidget {
                 // This
                 Container(
                     child: Text(
-                  "${model.price}",
-                  style: TextStyle(color: Colors.black, fontSize: 20.0),
+                  "GH ${model.price}",
+                  style: TextStyle(color: Colors.black, fontSize: 30.0),
                 )),
 
                 SizedBox(
@@ -56,26 +56,26 @@ class FoodDetailsView extends StatelessWidget {
                         child: Container(
                           padding: EdgeInsets.all(20.0),
                           decoration: BoxDecoration(
-                              color: Colors.yellowAccent,
-                              shape: BoxShape.circle),
+                              color: Colors.black, shape: BoxShape.circle),
                           child: Icon(
                             Icons.remove,
+                            color: Colors.white,
                           ),
                         )),
                     Container(
                         child: Text(
                       "${model.quantity}",
-                      style: TextStyle(color: Colors.black, fontSize: 20.0),
+                      style: TextStyle(color: Colors.black, fontSize: 40.0),
                     )),
                     InkWell(
                         onTap: () => {model.increaseQuantity()},
                         child: Container(
                           padding: EdgeInsets.all(20.0),
                           decoration: BoxDecoration(
-                              color: Colors.yellowAccent,
-                              shape: BoxShape.circle),
+                              color: Colors.black, shape: BoxShape.circle),
                           child: Icon(
                             Icons.add,
+                            color: Colors.white,
                           ),
                         )),
                   ],
@@ -85,19 +85,29 @@ class FoodDetailsView extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.all(20),
                   child: InkWell(
-                      onTap: () => {model.addToOrder()},
+                      onTap: () {
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text("Added  ${food.name} to cart"),
+                        ));
+
+                        model.addToOrder();
+                      },
                       child: Container(
                           padding: EdgeInsets.all(20.0),
                           decoration: BoxDecoration(
-                              color: Colors.greenAccent,
-                              shape: BoxShape.rectangle),
+                              color: Colors.black, shape: BoxShape.rectangle),
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("Add to Cart"),
+                                Text(
+                                  "Add to Cart",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                ),
                                 SizedBox(width: 10),
                                 Icon(
                                   Icons.shopping_cart,
+                                  color: Colors.white,
                                 ),
                               ]))),
                 ),

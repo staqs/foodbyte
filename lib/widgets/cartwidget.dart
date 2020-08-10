@@ -38,7 +38,7 @@ class _CartWidgetState extends State<CartWidget> {
               Stack(
                 children: <Widget>[
                   Container(
-                    height: MediaQuery.of(context).size.height / 5.5,
+                    height: MediaQuery.of(context).size.height / 9.5,
                     width: MediaQuery.of(context).size.width,
                     child: ClipRRect(
                       borderRadius: BorderRadius.only(

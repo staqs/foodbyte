@@ -3,5 +3,6 @@ class Order {
   final double price;
   final String foodId;
   final String userId;
-  Order(this.id, this.price, this.foodId, this.userId);
+  final int quantity;
+  Order({this.quantity, this.id, this.price, this.foodId, this.userId});
 }
