@@ -8,18 +8,15 @@ import 'package:stacked/stacked.dart';
 
 class RestaurantService with ReactiveServiceMixin {
   GraphQLClient cl = GraphQLClientAPI.clientToQuery();
-  // List<Food> foods = [];
-  RxValue<List<Food>> _foods = RxValue<List<Food>>(initial: []);
   RxValue<List<Restaurant>> _restaurants =
       RxValue<List<Restaurant>>(initial: []);
 
   List<Restaurant> get allRestaurants => _restaurants.value;
-  List<Food> get allFoods => _foods.value;
 
   RestaurantService() {
     getAllRestaurants();
-    listenToReactiveValues([_foods]);
-    print("Get all Foods In Foods Service");
+    listenToReactiveValues([_restaurants]);
+    print("Get All Restaurants");
   }
 
   getAllRestaurants() async {
@@ -68,7 +65,5 @@ class RestaurantService with ReactiveServiceMixin {
         notifyListeners();
       }
     }
-
-    print(_foods.value.toList());
   }
 }

@@ -41,4 +41,15 @@ class Mutations {
   }
 }
 ''';
+
+  static String allCategories = r'''
+ query{
+
+allCategories{
+  name
+  image
+}
+  
+}
+''';
 }

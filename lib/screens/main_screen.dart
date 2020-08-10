@@ -5,6 +5,7 @@ import 'package:flutter_foodybite/core/services/service_locator.dart';
 import 'package:flutter_foodybite/screens/cartview.dart';
 import 'package:flutter_foodybite/screens/home.dart';
 import 'package:flutter_foodybite/screens/profiledetails.dart';
+import 'package:flutter_foodybite/screens/profilescreen.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -28,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
           Home(),
           CartView(),
           Home(),
-          ProfileDetails(),
+          ProfilePage(),
         ],
       ),
       bottomNavigationBar: BottomAppBar(

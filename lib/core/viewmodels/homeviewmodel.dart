@@ -1,4 +1,7 @@
+import 'package:flutter_foodybite/core/models/category.dart';
 import 'package:flutter_foodybite/core/models/food.dart';
+import 'package:flutter_foodybite/core/models/restaurant.dart';
+import 'package:flutter_foodybite/core/services/categoryservice.dart';
 import 'package:flutter_foodybite/core/services/foodservice.dart';
 import 'package:flutter_foodybite/core/services/graphql_client_api.dart';
 import 'package:flutter_foodybite/core/services/orderservice.dart';
@@ -13,9 +16,12 @@ class HomeViewModel extends ReactiveViewModel {
   final OrderService order = locator<OrderService>();
   final FoodService foodService = locator<FoodService>();
   final RestaurantService restaurantService = locator<RestaurantService>();
+  final CategoryService categoryService = locator<CategoryService>();
   List<Food> foods = [];
 
   List<Food> get allFoods => foodService.allFoods;
+  List<Restaurant> get allRestaurants => restaurantService.allRestaurants;
+  List<Category> get allCategories => categoryService.allCategories;
 
   HomeViewModel() {
     print("Home View Model is Working");
@@ -45,5 +51,5 @@ class HomeViewModel extends ReactiveViewModel {
 
   @override
   List<ReactiveServiceMixin> get reactiveServices =>
-      [foodService, restaurantService];
+      [foodService, restaurantService, categoryService];
 }

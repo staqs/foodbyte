@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_foodybite/core/models/category.dart';
 import 'package:flutter_foodybite/core/models/food.dart';
+import 'package:flutter_foodybite/core/models/restaurant.dart';
 import 'package:flutter_foodybite/core/viewmodels/homeviewmodel.dart';
 import 'package:flutter_foodybite/screens/allcategories.dart';
 import 'package:flutter_foodybite/screens/categories_screen.dart';
 import 'package:flutter_foodybite/screens/food_details.dart';
+import 'package:flutter_foodybite/screens/restaurantsscreen.dart';
 import 'package:flutter_foodybite/screens/trending.dart';
 import 'package:flutter_foodybite/util/categories.dart';
 import 'package:flutter_foodybite/util/friends.dart';
@@ -207,9 +209,11 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
                           primary: false,
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
-                          itemCount: categories == null ? 0 : categories.length,
+                          itemCount: model.allCategories == null
+                              ? 0
+                              : model.allCategories.length,
                           itemBuilder: (BuildContext context, int index) {
-                            Category cat = categories[index];
+                            Category cat = model.allCategories[index];
 
                             return InkWell(
                               onTap: () => Navigator.of(context).push(
@@ -329,15 +333,17 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
                           primary: false,
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
-                          itemCount: categories == null ? 0 : categories.length,
+                          itemCount: model.allRestaurants == null
+                              ? 0
+                              : model.allRestaurants.length,
                           itemBuilder: (BuildContext context, int index) {
-                            Category cat = categories[index];
+                            Restaurant res = model.allRestaurants[index];
 
                             return InkWell(
                               onTap: () => Navigator.of(context).push(
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          CategoriesScreen(cat))),
+                                          RestaurantScreen(res))),
                               child: Padding(
                                 padding: EdgeInsets.only(right: 10.0),
                                 child: ClipRRect(
@@ -345,7 +351,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
                                   child: Stack(
                                     children: <Widget>[
                                       Image.asset(
-                                        cat.img,
+                                        res.image,
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 6,
@@ -392,7 +398,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
                                           ),
                                           child: Center(
                                             child: Text(
-                                              cat.name,
+                                              res.name,
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 20,

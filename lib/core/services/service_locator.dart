@@ -1,4 +1,5 @@
 import 'package:flutter_foodybite/core/services/apiservice.dart';
+import 'package:flutter_foodybite/core/services/categoryservice.dart';
 import 'package:flutter_foodybite/core/services/foodservice.dart';
 import 'package:flutter_foodybite/core/services/graphql_client_api.dart';
 import 'package:flutter_foodybite/core/services/orderservice.dart';
@@ -18,4 +19,5 @@ setupServiceLocator() {
   locator.registerLazySingleton<FoodService>(() => new FoodService());
   locator
       .registerLazySingleton<RestaurantService>(() => new RestaurantService());
+  locator.registerLazySingleton<CategoryService>(() => new CategoryService());
 }
