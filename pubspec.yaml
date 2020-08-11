@@ -64,6 +64,12 @@ dependencies:
   # Mocking
   mockito: ^4.1.1
 
+  # google maps
+  google_maps_flutter: ^0.5.27+3
+  # Add the following two lines
+
+  json_serializable: ^3.3.0
+
   # Network connection
   connectivity: ^0.4.8+6
   js: ^0.6.2
@@ -104,6 +110,7 @@ flutter:
     - assets/cm2.jpeg
     - assets/cm3.jpeg
     - assets/cm4.jpeg
+    - assets/destination_map_marker.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

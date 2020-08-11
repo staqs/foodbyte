@@ -28,6 +28,10 @@ class Mutations {
   allRestaurants{
     name
     image
+    status 
+    location
+    longitude
+    latitude
     foods{
        name
       image

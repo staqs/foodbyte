@@ -5,6 +5,7 @@ import 'package:flutter_foodybite/core/services/service_locator.dart';
 import 'package:flutter_foodybite/screens/aroundmescreen.dart';
 import 'package:flutter_foodybite/screens/cartview.dart';
 import 'package:flutter_foodybite/screens/home.dart';
+import 'package:flutter_foodybite/screens/mapscreen.dart';
 import 'package:flutter_foodybite/screens/profiledetails.dart';
 import 'package:flutter_foodybite/screens/profilescreen.dart';
 
@@ -28,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
         children: <Widget>[
           Home(),
           CartView(),
-          AroundMeScreen(),
+          MapsScreen(),
           ProfilePage(),
         ],
       ),

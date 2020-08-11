@@ -37,6 +37,10 @@ class RestaurantService with ReactiveServiceMixin {
         List<Food> foods = [];
         String name = item.data['name'];
         String image = item.data['image'];
+        String location = item.data['location'];
+        String status = item.data['status'];
+        double longitude = double.parse(item.data['longitude']);
+        double latitude = double.parse(item.data['latitude']);
         for (var item in item.data['foods']) {
           print(item);
           // print(item['name']);
@@ -52,8 +56,15 @@ class RestaurantService with ReactiveServiceMixin {
               description: item['description']));
         }
 
-        _restaurants.value
-            .add(new Restaurant(name: name, image: image, foods: foods));
+        _restaurants.value.add(new Restaurant(
+          status: status,
+          name: name,
+          location: location,
+          image: image,
+          foods: foods,
+          longitude: longitude,
+          latitude: latitude,
+        ));
         // _foods.value
         //   ..add(new Food(
         //       name: item.data['name'],
