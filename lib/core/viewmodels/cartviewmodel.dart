@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_foodybite/core/models/food.dart';
 import 'package:flutter_foodybite/core/models/order.dart';
 import 'package:flutter_foodybite/core/services/foodservice.dart';
@@ -6,8 +5,9 @@ import 'package:flutter_foodybite/core/services/graphql_client_api.dart';
 import 'package:flutter_foodybite/core/services/orderservice.dart';
 import 'package:flutter_foodybite/core/services/service_locator.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:stacked/stacked.dart';
 
-class CartViewModel extends ChangeNotifier {
+class CartViewModel extends ReactiveViewModel {
   GraphQLClient cl = GraphQLClientAPI.clientToQuery();
   final OrderService order = locator<OrderService>();
   final FoodService foodService = locator<FoodService>();
@@ -18,7 +18,7 @@ class CartViewModel extends ChangeNotifier {
   // List<ReactiveServiceMixin> get reactiveServices => [_informationService];
 
   List<Food> get allFoods => foodService.allFoods;
-  List<Order> get allOrders => order.getAllOrders();
+  List<Order> get allOrders => order.allOrders;
 
   double get totalPrice => order.getTotalPrice();
 
@@ -48,13 +48,7 @@ class CartViewModel extends ChangeNotifier {
     order.sendOrder();
     print("sending order called");
   }
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [order];
 }
-
-// class Food {
-//   final String name;
-//   final double price;
-//   final String image;
-//   final String description;
-
-//   Food({this.name, this.price, this.image, this.description});
-// }

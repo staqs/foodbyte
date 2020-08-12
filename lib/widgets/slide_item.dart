@@ -101,7 +101,7 @@ class _SlideItemState extends State<SlideItem> {
               ),
               SizedBox(height: 7.0),
               Padding(
-                padding: EdgeInsets.only(left: 15.0),
+                padding: EdgeInsets.only(left: 25.0),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   child: Text(
@@ -114,7 +114,7 @@ class _SlideItemState extends State<SlideItem> {
                   ),
                 ),
               ),
-              SizedBox(height: 7.0),
+              SizedBox(height: 3.0),
               Padding(
                 padding: EdgeInsets.only(left: 15.0),
                 child: Container(
@@ -124,14 +124,19 @@ class _SlideItemState extends State<SlideItem> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       HtmlWidget(
-                        "${widget.description}",
+                        widget.description.length > 120
+                            ? "${widget.description.substring(0, 120)}"
+                            : "${widget.description}",
                         textStyle: TextStyle(),
                       ),
-                      Text(
-                        "${widget.price}",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          "GH${widget.price}",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],

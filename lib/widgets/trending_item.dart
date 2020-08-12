@@ -101,7 +101,7 @@ class _TrendingItemState extends State<TrendingItem> {
               ),
               SizedBox(height: 7.0),
               Padding(
-                padding: EdgeInsets.only(left: 15.0),
+                padding: EdgeInsets.only(left: 25.0),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   child: Text(
@@ -116,19 +116,24 @@ class _TrendingItemState extends State<TrendingItem> {
               ),
               SizedBox(height: 7.0),
               Padding(
-                padding: EdgeInsets.only(left: 15.0),
+                padding: EdgeInsets.only(left: 15.0, right: 15),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      HtmlWidget("${widget.description}"),
-                      Text(
-                        "${widget.price}",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300,
+                      HtmlWidget(
+                        "${widget.description}",
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          "GH${widget.price}",
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],

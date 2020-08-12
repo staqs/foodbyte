@@ -30,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
           Home(),
           CartView(),
           MapsScreen(),
-          ProfilePage(),
+          ProfileDetails(),
         ],
       ),
       bottomNavigationBar: BottomAppBar(

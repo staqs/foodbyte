@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_foodybite/core/models/food.dart';
+import 'package:flutter_foodybite/core/models/restaurant.dart';
 import 'package:flutter_foodybite/core/viewmodels/fooddetailsview.dart';
 import 'package:flutter_foodybite/widgets/trending_item.dart';
 import 'package:stacked/stacked.dart';
@@ -23,7 +24,7 @@ class FoodDetailsView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+              children: <Widget>[
                 // This is the Item Info
                 TrendingItem(
                   img: "${food.image}",
@@ -31,6 +32,33 @@ class FoodDetailsView extends StatelessWidget {
                   description: "${food.description}",
                   price: "${food.price}",
                   rating: "${food.price}",
+                ),
+
+                Text(
+                    "You Are Buyin From ${model.asso.name}, Choose another Restaurant to Update"),
+                Container(
+                  height: 50,
+                  padding: EdgeInsets.all(10),
+                  // width: 100,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: model.associated.length,
+                      itemBuilder: (context, index) {
+                        // return buildChip(context, model, index);
+                        Restaurant res = model.associated[index];
+
+                        return ActionChip(
+                            avatar: CircleAvatar(
+                              backgroundColor: Colors.grey.shade800,
+                              child: Text("${res.name.substring(0, 1)}"),
+                            ),
+                            label: Text("${res.name}"),
+                            onPressed: () {
+                              print("Update model");
+                              model.updateAssociated(res);
+                            });
+                      }),
                 ),
 
                 SizedBox(
@@ -95,7 +123,10 @@ class FoodDetailsView extends StatelessWidget {
                       child: Container(
                           padding: EdgeInsets.all(20.0),
                           decoration: BoxDecoration(
-                              color: Colors.black, shape: BoxShape.rectangle),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              color: Colors.black,
+                              shape: BoxShape.rectangle),
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -118,4 +149,18 @@ class FoodDetailsView extends StatelessWidget {
       ),
     );
   }
+}
+
+buildChip(BuildContext context, FoodDetailsViewModel model, int index) {
+  Restaurant res = model.associated[index];
+  print(res.name);
+  return ActionChip(
+      avatar: CircleAvatar(
+        backgroundColor: Colors.grey.shade800,
+        child: Text("${res.name.substring(0, 1)}"),
+      ),
+      label: Text("${res.name}"),
+      onPressed: () {
+        print("Update model");
+      });
 }

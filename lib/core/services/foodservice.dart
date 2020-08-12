@@ -14,7 +14,7 @@ class FoodService with ReactiveServiceMixin {
   FoodService() {
     getAllFoods();
     listenToReactiveValues([_foods]);
-    print("Get all Foods In Foods Service");
+    // print("Get all Foods In Foods Service");
   }
 
   getAllFoods() async {
@@ -25,12 +25,12 @@ class FoodService with ReactiveServiceMixin {
     );
 
     if (!dl.hasException) {
-      print("has no error");
+      // print("has no error");
       // print(dl.data);
 
       for (var item in dl.data['allProducts']) {
-        print(item.data);
-        print("Getting food ${item.data['name']}");
+        // print(item.data);
+        // print("Getting food ${item.data['name']}");
         // var foo = jsonDecode()
         _foods.value
           ..add(new Food(
@@ -44,6 +44,6 @@ class FoodService with ReactiveServiceMixin {
       }
     }
 
-    print(_foods.value.toList());
+    // print(_foods.value.toList());
   }
 }

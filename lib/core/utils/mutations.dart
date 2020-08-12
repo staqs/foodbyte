@@ -15,9 +15,9 @@ class Mutations {
   ''';
 
   static String addItemToOrder = r'''
-    mutation addOrder($price : Float!, $itemId:String!, $quantity : Int!, $customer : String!){
-		createOrder(data : {price:$price, itemId: $itemId, quantity : $quantity, customer : $customer}){
-    itemId
+    mutation addOrder($price : Float!, $food:ProductRelateToOneInput!, $quantity : Int!, $customer : CustomerRelateToOneInput!, $res : RestaurantRelateToOneInput!){
+		createOrder(data : {price:$price, food: $food, quantity : $quantity, customer : $customer,  restaurant : $res}){
+    id
   }
 }
 ''';
@@ -26,6 +26,7 @@ class Mutations {
  query{
 
   allRestaurants{
+    id
     name
     image
     status 
@@ -46,12 +47,38 @@ class Mutations {
 }
 ''';
 
+  static String login = r'''
+query getCustomer($email : String!, $password : String!){
+  allCustomers(where : {email : $email, password : $password}){
+    name
+    email
+    id
+    password
+  }
+}
+
+''';
+
+  static String signup = r'''
+mutation($username : String!, $email : String!, $password : String!){
+   createCustomer(data : {name : $username, email :$email, password:$password}){
+    name
+    password
+    email
+    id
+  }
+
+}
+
+''';
+
   static String allCategories = r'''
  query{
 
 allCategories{
   name
   image
+  id
 }
   
 }

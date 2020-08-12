@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_foodybite/core/services/foodservice.dart';
 import 'package:flutter_foodybite/core/services/service_locator.dart';
+import 'package:flutter_foodybite/screens/SplashScreen.dart';
 import 'package:flutter_foodybite/screens/main_screen.dart';
 import 'package:flutter_foodybite/util/const.dart';
 
@@ -43,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: Constants.appName,
       theme: isDark ? Constants.darkTheme : Constants.lightTheme,
-      home: MainScreen(),
+      home: SplashScreen(),
     );
   }
 }

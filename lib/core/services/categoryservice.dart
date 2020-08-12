@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_foodybite/core/models/category.dart';
 import 'package:flutter_foodybite/core/services/graphql_client_api.dart';
 import 'package:flutter_foodybite/core/utils/mutations.dart';
-import 'package:flutter_foodybite/util/categories.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:observable_ish/value/value.dart';
 import 'package:stacked/stacked.dart';
@@ -21,7 +20,7 @@ class CategoryService with ReactiveServiceMixin {
   CategoryService() {
     getAllRestaurants();
     listenToReactiveValues([_categories]);
-    print("Get All Restaurants");
+    // print("Get All Restaurants");
   }
 
   getAllRestaurants() async {
@@ -32,12 +31,12 @@ class CategoryService with ReactiveServiceMixin {
     );
 
     if (!dl.hasException) {
-      print("has no error");
+      // print("has no error");
       // print(dl.data);
       Random rng = new Random();
       for (var item in dl.data['allCategories']) {
-        print(item.data);
-        print("Getting Category ${item.data['name']}");
+        // print(item.data);
+        // print("Getting Category ${item.data['name']}");
         // var foo = jsonDecode()
 
         _categories.value.add(new Category(

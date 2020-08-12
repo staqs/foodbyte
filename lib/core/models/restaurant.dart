@@ -8,9 +8,11 @@ class Restaurant {
   final String status;
   final String location;
   final List<Food> foods;
+  final String id;
 
   Restaurant(
-      {this.status,
+      {this.id,
+      this.status,
       this.latitude,
       this.longitude,
       this.location,
