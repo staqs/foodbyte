@@ -14,10 +14,10 @@ GetIt locator = GetIt.instance;
 setupServiceLocator() {
   locator.registerLazySingleton<StorageService>(
       () => new StorageServiceSharedPreferences());
+  locator.registerLazySingleton<FoodService>(() => new FoodService());
   locator.registerLazySingleton<APIService>(() => new GraphQLClientAPI());
 
   locator.registerLazySingleton<OrderService>(() => new OrderService());
-  locator.registerLazySingleton<FoodService>(() => new FoodService());
   locator.registerLazySingleton<AuthService>(() => new AuthService());
   locator
       .registerLazySingleton<RestaurantService>(() => new RestaurantService());
