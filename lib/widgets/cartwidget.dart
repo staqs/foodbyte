@@ -45,7 +45,7 @@ class _CartWidgetState extends State<CartWidget> {
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10),
                       ),
-                      child: Image.asset(
+                      child: Image.network(
                         "${widget.img}",
                         fit: BoxFit.cover,
                       ),

@@ -16,7 +16,7 @@ class CategoryItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.0),
           child: Stack(
             children: <Widget>[
-              Image.asset(
+              Image.network(
                 cat.img,
                 height: MediaQuery.of(context).size.height / 6,
                 width: MediaQuery.of(context).size.height,
